@@ -28,14 +28,18 @@ internal sealed class ContainsConstraint : ConstraintBase
         value switch
         {
             null => false,
-            string stringValue when _compareValue is string compareValue
-                => stringValue.Contains(compareValue, _comparison ?? default),
-            string stringValue when _compareValue is char compareValue
-                => stringValue.Contains(compareValue, _comparison ?? default),
+            string stringValue when _compareValue is string compareValue => stringValue.Contains(
+                compareValue,
+                _comparison ?? default
+            ),
+            string stringValue when _compareValue is char compareValue => stringValue.Contains(
+                compareValue,
+                _comparison ?? default
+            ),
             IDictionary dictionary => dictionary.Contains(_compareValue!),
             IList list => list.Contains(_compareValue!),
             IEnumerable enumerable => enumerable.Cast<object?>().Contains(_compareValue),
-            _ => throw new NotSupportedException($"Invalid type `{value!.GetType().FullName}`.")
+            _ => throw new NotSupportedException($"Invalid type `{value!.GetType().FullName}`."),
         };
 
     public override void SetDescription(StringBuilder builder) =>

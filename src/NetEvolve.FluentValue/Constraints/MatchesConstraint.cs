@@ -20,7 +20,7 @@ internal sealed class MatchesConstraint : ConstraintBase
         {
             string stringValue => _regex.IsMatch(stringValue),
             IConvertible convertible => _regex.IsMatch(convertible.ToString()!),
-            _ => false
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) =>

@@ -8,7 +8,7 @@ internal sealed class WhiteSpaceConstraint : ConstraintBase
         value switch
         {
             string stringValue => string.IsNullOrWhiteSpace(stringValue),
-            _ => false
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) =>

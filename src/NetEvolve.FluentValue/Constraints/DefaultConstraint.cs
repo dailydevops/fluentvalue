@@ -9,7 +9,7 @@ internal sealed class DefaultConstraint : ConstraintBase
         value?.GetType() switch
         {
             { IsValueType: true } valueType => GetDefault(valueType).Equals(value),
-            _ => false
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) => builder.Append(" is <default>");

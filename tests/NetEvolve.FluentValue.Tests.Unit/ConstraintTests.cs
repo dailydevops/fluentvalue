@@ -159,7 +159,7 @@ public class ConstraintTests
             { false, Value.Not.Null.And.Not.Empty, null },
             { false, Value.Not.Null.And.Not.Empty, string.Empty },
             // .Or.Not
-            { false, Value.StartsWith('A').Or.Not.StartsWith('H'), "Hello World!" }
+            { false, Value.StartsWith('A').Or.Not.StartsWith('H'), "Hello World!" },
         };
 
     [Theory]
@@ -214,6 +214,6 @@ public class ConstraintTests
             {
                 "\"{Value} not is <null> and (starts with `H` and ends with `!`).\"",
                 Value.Not.Null.And.Parenthesis(Value.StartsWith('H').And.EndsWith('!'))
-            }
+            },
         };
 }
