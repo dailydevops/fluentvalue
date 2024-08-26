@@ -19,10 +19,12 @@ internal sealed class EndsWithConstraint : ConstraintBase
     public override bool IsSatisfiedBy(object? value) =>
         value switch
         {
-            string stringValue when _compareValue is string compare
-                => stringValue.EndsWith(compare, _comparison ?? default),
+            string stringValue when _compareValue is string compare => stringValue.EndsWith(
+                compare,
+                _comparison ?? default
+            ),
             string stringValue when _compareValue is char compare => stringValue.EndsWith(compare),
-            _ => false
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) =>

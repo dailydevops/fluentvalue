@@ -13,7 +13,7 @@ internal sealed class EmptyConstraint : ConstraintBase
             Guid guidValue => guidValue == Guid.Empty,
             ICollection collection => collection.Count == 0,
             IEnumerable enumerable => !enumerable.GetEnumerator().MoveNext(),
-            _ => false
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) => builder.Append(" is <empty>");

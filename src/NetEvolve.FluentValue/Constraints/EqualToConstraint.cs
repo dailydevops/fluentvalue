@@ -19,11 +19,15 @@ internal sealed class EqualToConstraint : ConstraintBase
     public override bool IsSatisfiedBy(object? value) =>
         value switch
         {
-            string stringValue when _compareValue is string compareValue
-                => stringValue.Equals(compareValue, _comparison ?? default),
-            string stringValue when _compareValue is IConvertible convertible
-                => stringValue.Equals(convertible.ToString(), _comparison ?? default),
-            _ => false
+            string stringValue when _compareValue is string compareValue => stringValue.Equals(
+                compareValue,
+                _comparison ?? default
+            ),
+            string stringValue when _compareValue is IConvertible convertible => stringValue.Equals(
+                convertible.ToString(),
+                _comparison ?? default
+            ),
+            _ => false,
         };
 
     public override void SetDescription(StringBuilder builder) =>
