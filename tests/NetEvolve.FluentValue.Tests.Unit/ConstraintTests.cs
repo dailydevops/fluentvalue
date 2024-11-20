@@ -25,7 +25,7 @@ public class ConstraintTests
         _ = Assert.Throws<InvalidOperationException>(() => constraint.IsSatisfiedBy(true));
 
     public static TheoryData<IConstraint> InvalidConstraintData =>
-        new TheoryData<IConstraint> { Value.Not, Value.Null.And, Value.Not.And, Value.Null.Or };
+        [Value.Not, Value.Null.And, Value.Not.And, Value.Null.Or];
 
     [Theory]
     [MemberData(nameof(ConstraintValueData))]
