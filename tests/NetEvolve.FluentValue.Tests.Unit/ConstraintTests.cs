@@ -14,6 +14,20 @@ public class ConstraintTests
         _ = Assert.Throws<InvalidOperationException>(() => Value.Not.Not);
 
     [Fact]
+    public void Value_MultipleOperators_ThrowsInvalidOperationException() =>
+        Assert.Multiple(
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.And.And),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.And.Or),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.And.Xor),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Or.And),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Or.Or),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Or.Xor),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Xor.And),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Xor.Or),
+            () => _ = Assert.Throws<InvalidOperationException>(() => Value.Null.Xor.Xor)
+        );
+
+    [Fact]
     public void Value_Contains_Object_ThrowsNotSupportedException() =>
         _ = Assert.Throws<NotSupportedException>(
             () => Value.Contains(new object()).IsSatisfiedBy(new object())
@@ -25,7 +39,15 @@ public class ConstraintTests
         _ = Assert.Throws<InvalidOperationException>(() => constraint.IsSatisfiedBy(true));
 
     public static TheoryData<IConstraint> InvalidConstraintData =>
-        [Value.Not, Value.Null.And, Value.Not.And, Value.Null.Or];
+        [
+            Value.Not,
+            Value.Null.And,
+            Value.Null.Or,
+            Value.Null.Xor,
+            Value.Not.Null.And,
+            Value.Not.Null.Or,
+            Value.Not.Null.Xor,
+        ];
 
     [Theory]
     [MemberData(nameof(ConstraintValueData))]
@@ -72,6 +94,7 @@ public class ConstraintTests
             // .Default
             { false, Value.Default, 1 },
             { false, Value.Default, null },
+            { false, Value.Default, (int?)3 },
             { true, Value.Default, 0 },
             // .Empty
             { false, Value.Empty, "Hello World!" },
@@ -86,18 +109,22 @@ public class ConstraintTests
             { true, Value.Empty, new List<string>() },
             { false, Value.Empty, Enumerable.Range(10, 10) },
             { true, Value.Empty, Enumerable.Empty<int>() },
+            { false, Value.Empty, null },
             // .EndsWith
             { false, Value.EndsWith("Welt!"), "Hello World!" },
             { true, Value.EndsWith("World!"), "Hello World!" },
             { false, Value.EndsWith('?'), "Hello World!" },
             { true, Value.EndsWith('!'), "Hello World!" },
             { true, Value.EndsWith("world!", OrdinalIgnoreCase), "Hello World!" },
+            { false, Value.EndsWith("123"), 123 },
             // .EqualTo
             { false, Value.EqualTo("World!"), "Hello World!" },
             { true, Value.EqualTo("Hello World!"), "Hello World!" },
             { false, Value.EqualTo('H'), "Hello World!" },
             { true, Value.EqualTo(123456), "123456" },
             { true, Value.EqualTo("hello world!", OrdinalIgnoreCase), "Hello World!" },
+            { true, Value.EqualTo(123), 123 },
+            { true, Value.EqualTo(null), null },
             // .Matches
             { false, Value.Matches(@"\d+"), null },
             { true, Value.Matches(@"\d+"), 123456 },
@@ -111,14 +138,16 @@ public class ConstraintTests
             { false, Value.StartsWith('?'), "Hello World!" },
             { true, Value.StartsWith('H'), "Hello World!" },
             { true, Value.StartsWith("hello", OrdinalIgnoreCase), "Hello World!" },
+            { false, Value.StartsWith("123"), 123 },
             // .WhiteSpace
             { false, Value.WhiteSpace, "Hello World!" },
+            { false, Value.WhiteSpace, null },
             { true, Value.WhiteSpace, " " },
             { true, Value.WhiteSpace, "\t" },
             { true, Value.WhiteSpace, "\n" },
-            { true, Value.WhiteSpace, "\r" },
-            { true, Value.WhiteSpace, "\v" },
-            { true, Value.WhiteSpace, "\f" },
+            { true, Value.WhiteSpace, '\t' },
+            { true, Value.WhiteSpace, '\n' },
+            { false, Value.WhiteSpace, 1 },
             // .And Operators
             {
                 false,
@@ -134,6 +163,19 @@ public class ConstraintTests
             { false, Value.Null.Or.Empty, "Hello World!" },
             { true, Value.Null.Or.Empty, null },
             { true, Value.Null.Or.Empty, string.Empty },
+            // .Xor Operators
+            { false, Value.Null.Xor.Empty, "Hello World!" },
+            { true, Value.Null.Xor.Empty, string.Empty },
+            {
+                false,
+                Value.Contains("Hello", OrdinalIgnoreCase).Xor.Contains("World!", Ordinal),
+                "Hello World!"
+            },
+            {
+                true,
+                Value.Contains("Hello", OrdinalIgnoreCase).Xor.Not.Contains("World!", Ordinal),
+                "Hello World!"
+            },
             // .Not Operators
             { false, Value.Not.EqualTo(2), "2" },
             { false, Value.Not.EqualTo("Hello World!"), "Hello World!" },
@@ -154,6 +196,9 @@ public class ConstraintTests
             { true, Value.Not.Parenthesis(Value.Null.Or.Empty), "Hello World!" },
             { false, Value.Not.Parenthesis(Value.Null.Or.Empty), null },
             { false, Value.Not.Parenthesis(Value.Null.Or.Empty), string.Empty },
+            { false, Value.Parenthesis(Value.Null.Or.Empty), "Hello World!" },
+            { true, Value.Parenthesis(Value.Null.Or.Empty), null },
+            { true, Value.Parenthesis(Value.Null.Or.Empty), string.Empty },
             // .And.Not
             { true, Value.Not.Null.And.Not.Empty, "Hello World!" },
             { false, Value.Not.Null.And.Not.Empty, null },

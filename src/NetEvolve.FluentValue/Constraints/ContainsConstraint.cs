@@ -10,13 +10,13 @@ internal sealed class ContainsConstraint : ConstraintBase
     private readonly object? _compareValue;
     private readonly StringComparison? _comparison;
 
-    public ContainsConstraint(char compareValue, StringComparison comparison)
+    internal ContainsConstraint(char compareValue, StringComparison comparison)
     {
         _compareValue = compareValue;
         _comparison = comparison;
     }
 
-    public ContainsConstraint(string compareValue, StringComparison comparison)
+    internal ContainsConstraint(string compareValue, StringComparison comparison)
     {
         _compareValue = compareValue;
         _comparison = comparison;
@@ -37,7 +37,7 @@ internal sealed class ContainsConstraint : ConstraintBase
                 _comparison ?? default
             ),
             IDictionary dictionary => dictionary.Contains(_compareValue!),
-            IList list => list.Contains(_compareValue!),
+            IList list => list.Contains(_compareValue),
             IEnumerable enumerable => enumerable.Cast<object?>().Contains(_compareValue),
             _ => throw new NotSupportedException($"Invalid type `{value!.GetType().FullName}`."),
         };
