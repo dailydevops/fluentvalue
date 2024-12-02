@@ -1,14 +1,5 @@
 <Project>
 
-  <PropertyGroup>
-    <DirEngineering>$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', 'eng'))</DirEngineering>
-    <DirEngineeringSettings>$([MSBuild]::NormalizeDirectory('$(DirEngineering)', 'settings'))</DirEngineeringSettings>
-  </PropertyGroup>
-
-  <Import Project="$(DirEngineeringSettings)sln.build.props" />
-  <Import Project="$(DirEngineeringSettings)src.build.props" Condition=" '$(IsTestableProject)' != 'true' " />
-  <Import Project="$(DirEngineeringSettings)tests.build.props" Condition=" '$(IsTestableProject)' == 'true' " />
-
   <PropertyGroup Label="Package settings">
     <Title>$(MSBuildProjectName)</Title>
     <Description>The fluent value validation library provides a set of fluent interfaces to validate values.</Description>
@@ -20,8 +11,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <NetEvolve_ProjectTargetFrameworks>net6.0;net8.0</NetEvolve_ProjectTargetFrameworks>
-    <NetEvolve_TestTargetFrameworks>net6.0;net7.0;net8.0</NetEvolve_TestTargetFrameworks>
+    <NetEvolve_ProjectTargetFrameworks>net6.0;net8.0;net9.0</NetEvolve_ProjectTargetFrameworks>
+    <NetEvolve_TestTargetFrameworks>net6.0;net7.0;net8.0;net9.0</NetEvolve_TestTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>

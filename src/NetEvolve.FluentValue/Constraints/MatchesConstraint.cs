@@ -12,7 +12,7 @@ internal sealed class MatchesConstraint : ConstraintBase
     public MatchesConstraint(string pattern, RegexOptions? options)
     {
         _pattern = pattern;
-        _regex = new Regex(pattern, options ?? default);
+        _regex = new Regex(pattern, options ?? default, TimeSpan.FromSeconds(5));
     }
 
     public override bool IsSatisfiedBy(object? value) =>

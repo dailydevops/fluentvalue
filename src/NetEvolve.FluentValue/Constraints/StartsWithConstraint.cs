@@ -8,9 +8,9 @@ internal sealed class StartsWithConstraint : ConstraintBase
     private readonly object? _compareValue;
     private readonly StringComparison? _comparison;
 
-    public StartsWithConstraint(char compareValue) => _compareValue = compareValue;
+    internal StartsWithConstraint(char compareValue) => _compareValue = compareValue;
 
-    public StartsWithConstraint(string compareValue, StringComparison comparison)
+    internal StartsWithConstraint(string compareValue, StringComparison comparison)
     {
         _compareValue = compareValue;
         _comparison = comparison;

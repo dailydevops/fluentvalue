@@ -8,7 +8,7 @@ internal sealed class ParenthesisConstraint : ConstraintBase
 {
     private readonly ConstraintBase _constraint;
 
-    public ParenthesisConstraint(IConstraint constraint)
+    internal ParenthesisConstraint(IConstraint constraint)
     {
         Argument.ThrowIfNull(constraint);
 

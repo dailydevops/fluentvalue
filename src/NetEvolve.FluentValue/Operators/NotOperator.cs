@@ -9,9 +9,7 @@ internal sealed class NotOperator : OperatorBase
 {
     internal IConstraint? _constraint;
 
-    public NotOperator() { }
-
-    public NotOperator(IConstraint constraint) => _constraint = constraint;
+    internal NotOperator() { }
 
     public override bool IsSatisfiedBy(object? value)
     {

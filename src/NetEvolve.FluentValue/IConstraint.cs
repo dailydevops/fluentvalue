@@ -41,7 +41,18 @@ public interface IConstraint
         "S3060:\"is\" should not be used with \"this\"",
         Justification = "As designed."
     )]
-    IOperator And => this is AndOperator op ? op : new AndOperator(this);
+    IOperator And
+    {
+        get
+        {
+            if (this is IOperator op && op is not NotOperator)
+            {
+                throw new InvalidOperationException("Cannot chain multiple operators.");
+            }
+
+            return new AndOperator(this);
+        }
+    }
 
     /// <summary>
     /// Combines the current constraint with the given constraint using a logical OR operation.
@@ -51,5 +62,37 @@ public interface IConstraint
         "S3060:\"is\" should not be used with \"this\"",
         Justification = "As designed."
     )]
-    IOperator Or => this is OrOperator op ? op : new OrOperator(this);
+    IOperator Or
+    {
+        get
+        {
+            if (this is IOperator op && op is not NotOperator)
+            {
+                throw new InvalidOperationException("Cannot chain multiple operators.");
+            }
+
+            return new OrOperator(this);
+        }
+    }
+
+    /// <summary>
+    /// Combines the current constraint with the given constraint using a logical XOR operation.
+    /// </summary>
+    [SuppressMessage(
+        "Blocker Code Smell",
+        "S3060:\"is\" should not be used with \"this\"",
+        Justification = "As designed."
+    )]
+    IOperator Xor
+    {
+        get
+        {
+            if (this is IOperator op && op is not NotOperator)
+            {
+                throw new InvalidOperationException("Cannot chain multiple operators.");
+            }
+
+            return new XorOperator(this);
+        }
+    }
 }

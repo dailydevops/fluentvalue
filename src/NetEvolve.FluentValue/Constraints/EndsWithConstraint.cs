@@ -8,9 +8,9 @@ internal sealed class EndsWithConstraint : ConstraintBase
     private readonly object? _compareValue;
     private readonly StringComparison? _comparison;
 
-    public EndsWithConstraint(char compareValue) => _compareValue = compareValue;
+    internal EndsWithConstraint(char compareValue) => _compareValue = compareValue;
 
-    public EndsWithConstraint(string compareValue, StringComparison comparison)
+    internal EndsWithConstraint(string compareValue, StringComparison comparison)
     {
         _compareValue = compareValue;
         _comparison = comparison;

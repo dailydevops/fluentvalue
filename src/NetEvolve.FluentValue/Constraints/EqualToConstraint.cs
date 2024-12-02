@@ -8,9 +8,9 @@ internal sealed class EqualToConstraint : ConstraintBase
     private readonly object? _compareValue;
     private readonly StringComparison? _comparison;
 
-    public EqualToConstraint(object? compareValue) => _compareValue = compareValue;
+    internal EqualToConstraint(object? compareValue) => _compareValue = compareValue;
 
-    public EqualToConstraint(string compareValue, StringComparison comparison)
+    internal EqualToConstraint(string compareValue, StringComparison comparison)
     {
         _compareValue = compareValue;
         _comparison = comparison;
@@ -19,6 +19,7 @@ internal sealed class EqualToConstraint : ConstraintBase
     public override bool IsSatisfiedBy(object? value) =>
         value switch
         {
+            null => _compareValue is null,
             string stringValue when _compareValue is string compareValue => stringValue.Equals(
                 compareValue,
                 _comparison ?? default
@@ -27,7 +28,7 @@ internal sealed class EqualToConstraint : ConstraintBase
                 convertible.ToString(),
                 _comparison ?? default
             ),
-            _ => false,
+            _ => value.Equals(_compareValue),
         };
 
     public override void SetDescription(StringBuilder builder) =>

@@ -5,12 +5,12 @@ using System.Text;
 using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
 
-internal sealed class AndOperator : OperatorBase
+internal sealed class XorOperator : OperatorBase
 {
     private readonly IConstraint _left;
     private IConstraint? _right;
 
-    internal AndOperator(IConstraint left)
+    internal XorOperator(IConstraint left)
     {
         Argument.ThrowIfNull(left);
 
@@ -24,7 +24,7 @@ internal sealed class AndOperator : OperatorBase
             throw new InvalidOperationException();
         }
 
-        return _left.IsSatisfiedBy(value) && _right.IsSatisfiedBy(value);
+        return _left.IsSatisfiedBy(value) ^ _right.IsSatisfiedBy(value);
     }
 
     public override IConstraint SetConstraint(IConstraint constraint)
@@ -49,7 +49,7 @@ internal sealed class AndOperator : OperatorBase
         {
             return;
         }
-        _ = builder.Append(" and");
+        _ = builder.Append(" xor");
         _right.SetDescription(builder);
     }
 }
