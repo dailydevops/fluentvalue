@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup Label="Package settings">
     <Title>$(MSBuildProjectName)</Title>
     <Description>The fluent value validation library provides a set of fluent interfaces to validate values.</Description>
@@ -9,15 +8,12 @@
     <PackageTags>fluent;value;validation;</PackageTags>
     <CopyrightYearStart>2024</CopyrightYearStart>
   </PropertyGroup>
-
   <PropertyGroup>
     <NetEvolve_ProjectTargetFrameworks>net6.0;net8.0;net9.0</NetEvolve_ProjectTargetFrameworks>
     <NetEvolve_TestTargetFrameworks>net6.0;net7.0;net8.0;net9.0</NetEvolve_TestTargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Workaround, until https://github.com/GitTools/GitVersion/pull/4206 is released -->
     <GitVersionTargetFramework>net8.0</GitVersionTargetFramework>
   </PropertyGroup>
-
 </Project>

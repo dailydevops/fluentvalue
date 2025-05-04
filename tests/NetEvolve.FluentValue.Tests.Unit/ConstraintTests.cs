@@ -29,8 +29,8 @@ public class ConstraintTests
 
     [Fact]
     public void Value_Contains_Object_ThrowsNotSupportedException() =>
-        _ = Assert.Throws<NotSupportedException>(
-            () => Value.Contains(new object()).IsSatisfiedBy(new object())
+        _ = Assert.Throws<NotSupportedException>(() =>
+            Value.Contains(new object()).IsSatisfiedBy(new object())
         );
 
     [Theory]

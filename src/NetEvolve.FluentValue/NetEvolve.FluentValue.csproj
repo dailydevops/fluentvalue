@@ -1,11 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetEvolve_ProjectTargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="NetEvolve.Arguments" />
   </ItemGroup>
-
 </Project>
