@@ -9,11 +9,7 @@ using NetEvolve.FluentValue.Operators;
 /// <summary>
 /// Public interface for operators, which can be used to build complex expressions.
 /// </summary>
-[SuppressMessage(
-    "Naming",
-    "CA1716:Identifiers should not match keywords",
-    Justification = "As designed."
-)]
+[SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "As designed.")]
 public interface IOperator : IConstraint
 {
     /// <summary>
@@ -51,8 +47,7 @@ public interface IOperator : IConstraint
     /// <returns>
     /// The current instance.
     /// </returns>
-    IConstraint Contains(object? compareValue) =>
-        SetConstraint(new ContainsConstraint(compareValue));
+    IConstraint Contains(object? compareValue) => SetConstraint(new ContainsConstraint(compareValue));
 
     /// <summary>
     /// Appends a constraint that the value contains the specified string.
@@ -147,9 +142,7 @@ public interface IOperator : IConstraint
 #if NET7_0_OR_GREATER
         [StringSyntax(StringSyntaxAttribute.Regex)]
 #endif
-        string pattern,
-        RegexOptions? options = null
-    ) => SetConstraint(new MatchesConstraint(pattern, options));
+        string pattern, RegexOptions? options = null) => SetConstraint(new MatchesConstraint(pattern, options));
 
     /// <summary>
     /// Appends a negation operator.
@@ -186,8 +179,7 @@ public interface IOperator : IConstraint
     /// <returns>
     /// The current instance.
     /// </returns>
-    IConstraint Parenthesis(IConstraint constraint) =>
-        SetConstraint(new ParenthesisConstraint(constraint));
+    IConstraint Parenthesis(IConstraint constraint) => SetConstraint(new ParenthesisConstraint(constraint));
 
     /// <summary>
     /// Appends a constraint that the value starts with the specified character.
@@ -198,8 +190,7 @@ public interface IOperator : IConstraint
     /// <returns>
     /// The current instance.
     /// </returns>
-    IConstraint StartsWith(char compareValue) =>
-        SetConstraint(new StartsWithConstraint(compareValue));
+    IConstraint StartsWith(char compareValue) => SetConstraint(new StartsWithConstraint(compareValue));
 
     /// <summary>
     /// Appends a constraint that the value starts with the specified string.
