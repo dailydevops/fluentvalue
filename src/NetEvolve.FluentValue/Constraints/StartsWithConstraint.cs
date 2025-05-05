@@ -19,9 +19,7 @@ internal sealed class StartsWithConstraint : ConstraintBase
     public override bool IsSatisfiedBy(object? value) =>
         value switch
         {
-            string stringValue when _compareValue is char compareValue => stringValue.StartsWith(
-                compareValue
-            ),
+            string stringValue when _compareValue is char compareValue => stringValue.StartsWith(compareValue),
             string stringValue when _compareValue is string compareValue => stringValue.StartsWith(
                 compareValue,
                 _comparison ?? default

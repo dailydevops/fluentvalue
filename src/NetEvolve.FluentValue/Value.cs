@@ -37,10 +37,8 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint Contains(
-        string compareValue,
-        StringComparison comparison = default
-    ) => new ContainsConstraint(compareValue, comparison);
+    public static IConstraint Contains(string compareValue, StringComparison comparison = default) =>
+        new ContainsConstraint(compareValue, comparison);
 
     /// <summary>
     /// Appends a constraint that the value contains a <see langword="object"/>.
@@ -51,8 +49,7 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint Contains(object? compareValue) =>
-        new ContainsConstraint(compareValue);
+    public static IConstraint Contains(object? compareValue) => new ContainsConstraint(compareValue);
 
     /// <summary>
     /// Appends a constraint that the value is the default value.
@@ -87,10 +84,8 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint EndsWith(
-        string compareValue,
-        StringComparison comparison = default
-    ) => new EndsWithConstraint(compareValue, comparison);
+    public static IConstraint EndsWith(string compareValue, StringComparison comparison = default) =>
+        new EndsWithConstraint(compareValue, comparison);
 
     /// <summary>
     /// Appends a constraint that the value is equal to the specified <see langword="object"/>.
@@ -132,9 +127,7 @@ public static class Value
     /// </returns>
     public static IConstraint Matches(
 #if NET7_0_OR_GREATER
-        [System.Diagnostics.CodeAnalysis.StringSyntax(
-            System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex
-        )]
+        [System.Diagnostics.CodeAnalysis.StringSyntax(System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex)]
 #endif
         string pattern,
         RegexOptions? options = null
@@ -159,8 +152,7 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint Parenthesis(IConstraint constraint) =>
-        new ParenthesisConstraint(constraint);
+    public static IConstraint Parenthesis(IConstraint constraint) => new ParenthesisConstraint(constraint);
 
     /// <summary>
     /// Appends a constraint that the value starts with the specified character.
@@ -171,8 +163,7 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint StartsWith(char compareValue) =>
-        new StartsWithConstraint(compareValue);
+    public static IConstraint StartsWith(char compareValue) => new StartsWithConstraint(compareValue);
 
     /// <summary>
     /// Appends a constraint that the value starts with the specified string.
@@ -186,10 +177,8 @@ public static class Value
     /// <returns>
     /// The current instance.
     /// </returns>
-    public static IConstraint StartsWith(
-        string compareValue,
-        StringComparison comparison = default
-    ) => new StartsWithConstraint(compareValue, comparison);
+    public static IConstraint StartsWith(string compareValue, StringComparison comparison = default) =>
+        new StartsWithConstraint(compareValue, comparison);
 
     /// <summary>
     /// Appends a constraint that the value is a whitespace character.

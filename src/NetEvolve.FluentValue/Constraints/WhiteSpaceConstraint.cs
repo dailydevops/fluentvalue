@@ -12,8 +12,7 @@ internal sealed class WhiteSpaceConstraint : ConstraintBase
             _ => false,
         };
 
-    public override void SetDescription(StringBuilder builder) =>
-        builder.Append(" is <whitespace>");
+    public override void SetDescription(StringBuilder builder) => builder.Append(" is <whitespace>");
 
     private static bool IsWhiteSpace(ReadOnlySpan<char> value)
     {

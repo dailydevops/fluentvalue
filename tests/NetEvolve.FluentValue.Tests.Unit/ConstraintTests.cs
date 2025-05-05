@@ -29,9 +29,7 @@ public class ConstraintTests
 
     [Fact]
     public void Value_Contains_Object_ThrowsNotSupportedException() =>
-        _ = Assert.Throws<NotSupportedException>(() =>
-            Value.Contains(new object()).IsSatisfiedBy(new object())
-        );
+        _ = Assert.Throws<NotSupportedException>(() => Value.Contains(new object()).IsSatisfiedBy(new object()));
 
     [Theory]
     [MemberData(nameof(InvalidConstraintData))]
@@ -149,16 +147,8 @@ public class ConstraintTests
             { true, Value.WhiteSpace, '\n' },
             { false, Value.WhiteSpace, 1 },
             // .And Operators
-            {
-                false,
-                Value.Contains("Hello", OrdinalIgnoreCase).And.Contains("Welt!", Ordinal),
-                "Hello World!"
-            },
-            {
-                true,
-                Value.Contains("Hello", OrdinalIgnoreCase).And.Contains("World!", Ordinal),
-                "Hello World!"
-            },
+            { false, Value.Contains("Hello", OrdinalIgnoreCase).And.Contains("Welt!", Ordinal), "Hello World!" },
+            { true, Value.Contains("Hello", OrdinalIgnoreCase).And.Contains("World!", Ordinal), "Hello World!" },
             // .Or Operators
             { false, Value.Null.Or.Empty, "Hello World!" },
             { true, Value.Null.Or.Empty, null },
@@ -166,16 +156,8 @@ public class ConstraintTests
             // .Xor Operators
             { false, Value.Null.Xor.Empty, "Hello World!" },
             { true, Value.Null.Xor.Empty, string.Empty },
-            {
-                false,
-                Value.Contains("Hello", OrdinalIgnoreCase).Xor.Contains("World!", Ordinal),
-                "Hello World!"
-            },
-            {
-                true,
-                Value.Contains("Hello", OrdinalIgnoreCase).Xor.Not.Contains("World!", Ordinal),
-                "Hello World!"
-            },
+            { false, Value.Contains("Hello", OrdinalIgnoreCase).Xor.Contains("World!", Ordinal), "Hello World!" },
+            { true, Value.Contains("Hello", OrdinalIgnoreCase).Xor.Not.Contains("World!", Ordinal), "Hello World!" },
             // .Not Operators
             { false, Value.Not.EqualTo(2), "2" },
             { false, Value.Not.EqualTo("Hello World!"), "Hello World!" },
@@ -247,10 +229,7 @@ public class ConstraintTests
             // .WhiteSpace
             { "\"{Value} is <whitespace>.\"", Value.WhiteSpace },
             // .And Operators
-            {
-                "\"{Value} contains `Hello` and contains `World!`.\"",
-                Value.Contains("Hello").And.Contains("World!")
-            },
+            { "\"{Value} contains `Hello` and contains `World!`.\"", Value.Contains("Hello").And.Contains("World!") },
             // .Or Operators
             { "\"{Value} is <null> or is <empty>.\"", Value.Null.Or.Empty },
             // .Not.Null

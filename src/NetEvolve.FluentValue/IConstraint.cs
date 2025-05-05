@@ -7,11 +7,7 @@ using NetEvolve.FluentValue.Operators;
 /// <summary>
 /// Public interface for constraints, which can be used to build complex expressions.
 /// </summary>
-[SuppressMessage(
-    "Naming",
-    "CA1716:Identifiers should not match keywords",
-    Justification = "As designed."
-)]
+[SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "As designed.")]
 public interface IConstraint
 {
     /// <summary>
