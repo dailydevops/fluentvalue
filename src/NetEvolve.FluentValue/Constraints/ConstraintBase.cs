@@ -1,6 +1,7 @@
 ﻿namespace NetEvolve.FluentValue.Constraints;
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -20,11 +21,13 @@ internal abstract class ConstraintBase : IConstraint
 
     private const int DefaultCapacity = 1024;
 
+    /// <inheritdoc />
     public abstract bool IsSatisfiedBy(object? value);
 
+    /// <inheritdoc />
     public abstract void SetDescription(StringBuilder builder);
 
-    /// <inheritdoc/>
+    /// <inhertdoc />
     [Obsolete("This is base `object` method that should not be called.", true)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DebuggerHidden]
