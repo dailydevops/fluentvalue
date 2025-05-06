@@ -4,8 +4,9 @@ using System;
 using System.Text;
 using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
+using NetEvolve.FluentValue.Constraints;
 
-internal sealed class NotOperator : OperatorBase
+internal sealed class NotOperator : ConstraintBase, IOperator
 {
     internal IConstraint? _constraint;
 
@@ -21,7 +22,7 @@ internal sealed class NotOperator : OperatorBase
         return !_constraint.IsSatisfiedBy(value);
     }
 
-    public override IConstraint SetConstraint(IConstraint constraint)
+    public IConstraint SetConstraint(IConstraint constraint)
     {
         Argument.ThrowIfNull(constraint);
 
