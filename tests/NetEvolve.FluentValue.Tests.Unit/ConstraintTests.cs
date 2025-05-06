@@ -8,7 +8,6 @@ using static System.StringComparison;
 
 public class ConstraintTests
 {
-#pragma warning disable TUnit0046 // TUnit0046: Return a `Func<T>` rather than a `<T>`
     [Test]
     [MethodDataSource(nameof(ChainedInvalidOperationsData))]
     public void Value_ChainedInvalidOperations_ShouldThrowInvalidOperationException(Func<IConstraint> funcConstraint) =>
@@ -30,7 +29,6 @@ public class ConstraintTests
             () => Value.Null.Xor.Or,
             () => Value.Null.Xor.Xor,
         ];
-#pragma warning restore TUnit0046 // TUnit0046: Return a `Func<T>` rather than a `<T>`
 
     [Test]
     public void Value_WhenNewObject_ShouldThrowNotSupportedException() =>
