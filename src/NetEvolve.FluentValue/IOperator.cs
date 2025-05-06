@@ -138,11 +138,8 @@ public interface IOperator : IConstraint
     /// <returns>
     /// The current instance.
     /// </returns>
-    IConstraint Matches(
-#if NET7_0_OR_GREATER
-        [StringSyntax(StringSyntaxAttribute.Regex)]
-#endif
-        string pattern, RegexOptions? options = null) => SetConstraint(new MatchesConstraint(pattern, options));
+    IConstraint Matches([StringSyntax(StringSyntaxAttribute.Regex)] string pattern, RegexOptions? options = null) =>
+        SetConstraint(new MatchesConstraint(pattern, options));
 
     /// <summary>
     /// Appends a negation operator.
@@ -164,6 +161,21 @@ public interface IOperator : IConstraint
             return (IOperator)SetConstraint(new NotOperator());
         }
     }
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> the <see langword="default"/> value.
+    /// </summary>
+    IConstraint NotDefault => SetConstraint(new NotDefaultConstraint());
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> empty.
+    /// </summary>
+    IConstraint NotEmpty => SetConstraint(new NotEmptyConstraint());
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> <see langword="null"/>.
+    /// </summary>
+    IConstraint NotNull => SetConstraint(new NotNullConstraint());
 
     /// <summary>
     /// Appends a constraint that the value is <see langword="null"/>.
