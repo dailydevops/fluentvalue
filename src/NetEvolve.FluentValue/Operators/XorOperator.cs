@@ -4,8 +4,9 @@ using System;
 using System.Text;
 using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
+using NetEvolve.FluentValue.Constraints;
 
-internal sealed class XorOperator : OperatorBase
+internal sealed class XorOperator : ConstraintBase, IOperator
 {
     private readonly IConstraint _left;
     private IConstraint? _right;
@@ -27,7 +28,7 @@ internal sealed class XorOperator : OperatorBase
         return _left.IsSatisfiedBy(value) ^ _right.IsSatisfiedBy(value);
     }
 
-    public override IConstraint SetConstraint(IConstraint constraint)
+    public IConstraint SetConstraint(IConstraint constraint)
     {
         Argument.ThrowIfNull(constraint);
 
