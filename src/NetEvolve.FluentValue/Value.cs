@@ -1,6 +1,7 @@
 ﻿namespace NetEvolve.FluentValue;
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using NetEvolve.FluentValue.Constraints;
 using NetEvolve.FluentValue.Operators;
@@ -52,7 +53,7 @@ public static class Value
     public static IConstraint Contains(object? compareValue) => new ContainsConstraint(compareValue);
 
     /// <summary>
-    /// Appends a constraint that the value is the default value.
+    /// Appends a constraint that the value is the <see langword="default"/> value.
     /// </summary>
     public static IConstraint Default => new DefaultConstraint();
 
@@ -126,10 +127,7 @@ public static class Value
     /// The current instance.
     /// </returns>
     public static IConstraint Matches(
-#if NET7_0_OR_GREATER
-        [System.Diagnostics.CodeAnalysis.StringSyntax(System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex)]
-#endif
-        string pattern,
+        [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
         RegexOptions? options = null
     ) => new MatchesConstraint(pattern, options);
 
@@ -137,6 +135,21 @@ public static class Value
     /// Appends a negation operator.
     /// </summary>
     public static IOperator Not => new NotOperator();
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> the <see langword="default"/> value.
+    /// </summary>
+    public static IConstraint NotDefault => new NotDefaultConstraint();
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> empty.
+    /// </summary>
+    public static IConstraint NotEmpty => new NotEmptyConstraint();
+
+    /// <summary>
+    /// Appends a constraint that the value is <see langword="not"/> <see langword="null"/>.
+    /// </summary>
+    public static IConstraint NotNull => new NotNullConstraint();
 
     /// <summary>
     /// Appends a constraint that the value is <see langword="null"/>.
