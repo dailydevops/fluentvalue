@@ -187,6 +187,8 @@ public class ConstraintTests
             () => (true, Value.NotEmpty, new List<string> { "Hello", "World!" }),
             () => (false, Value.NotEmpty, Enumerable.Empty<int>()),
             () => (true, Value.NotEmpty, Enumerable.Range(10, 10)),
+            () => (true, Value.NotEmpty, Guid.NewGuid()),
+            () => (false, Value.NotEmpty, Guid.Empty),
             // .NotNull
             () => (false, Value.NotNull, null),
             () => (true, Value.NotNull, "Hello World!"),
