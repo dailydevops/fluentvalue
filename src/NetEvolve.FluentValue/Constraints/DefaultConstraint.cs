@@ -9,7 +9,7 @@ internal sealed class DefaultConstraint : ConstraintBase
     public override bool IsSatisfiedBy(object? value) =>
         value?.GetType() switch
         {
-            { IsValueType: true } valueType => TypeExtensions.GetDefault(valueType).Equals(value),
+            { IsValueType: true } valueType => TypeExtensions.GetDefault(valueType)?.Equals(value) ?? false,
             _ => false,
         };
 
