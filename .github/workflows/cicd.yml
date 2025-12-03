@@ -22,10 +22,9 @@ jobs:
   all:
     if: github.run_id != 1
     name: Build & Tests
-    uses: dailydevops/pipelines/.github/workflows/cicd-dotnet.yml@1.2.28
+    uses: dailydevops/pipelines/.github/workflows/build-dotnet-single.yml@1.2.28
     with:
-      enableSonarQube: true
-      dotnet-logging: ${{ inputs.dotnet-logging || 'minimal' }}
-      dotnet-version: ${{ vars.NE_DOTNET_TARGETFRAMEWORKS }}
-      solution: ./FluentValue.sln
+      dotnetLogging: ${{ inputs.dotnet-logging || 'minimal' }}
+      dotnetVersion: ${{ vars.NE_DOTNET_TARGETFRAMEWORKS }}
+      solution: ./FluentValue.slnx
     secrets: inherit
