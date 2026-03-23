@@ -2,7 +2,6 @@
 
 using System;
 using System.Text;
-using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
 using NetEvolve.FluentValue.Constraints;
 
@@ -24,7 +23,7 @@ internal sealed class NotOperator : ConstraintBase, IOperator
 
     public IConstraint SetConstraint(IConstraint constraint)
     {
-        Argument.ThrowIfNull(constraint);
+        ArgumentNullException.ThrowIfNull(constraint);
 
         _constraint = constraint;
 

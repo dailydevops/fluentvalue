@@ -1,7 +1,6 @@
 ﻿namespace NetEvolve.FluentValue.Constraints;
 
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
