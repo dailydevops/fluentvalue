@@ -2,7 +2,6 @@
 
 using System;
 using System.Text;
-using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
 using NetEvolve.FluentValue.Constraints;
 
@@ -13,7 +12,7 @@ internal sealed class OrOperator : ConstraintBase, IOperator
 
     internal OrOperator(IConstraint left)
     {
-        Argument.ThrowIfNull(left);
+        ArgumentNullException.ThrowIfNull(left);
 
         _left = left;
     }
@@ -30,7 +29,7 @@ internal sealed class OrOperator : ConstraintBase, IOperator
 
     public IConstraint SetConstraint(IConstraint constraint)
     {
-        Argument.ThrowIfNull(constraint);
+        ArgumentNullException.ThrowIfNull(constraint);
 
         if (_right is NotOperator notOperator)
         {

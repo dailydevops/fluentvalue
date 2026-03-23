@@ -1,7 +1,6 @@
 ﻿namespace NetEvolve.FluentValue.Constraints;
 
 using System.Text;
-using NetEvolve.Arguments;
 using NetEvolve.FluentValue;
 
 internal sealed class ParenthesisConstraint : ConstraintBase
@@ -10,14 +9,14 @@ internal sealed class ParenthesisConstraint : ConstraintBase
 
     internal ParenthesisConstraint(IConstraint constraint)
     {
-        Argument.ThrowIfNull(constraint);
+        ArgumentNullException.ThrowIfNull(constraint);
 
         _constraint = (ConstraintBase)constraint;
     }
 
     public override bool IsSatisfiedBy(object? value)
     {
-        Argument.ThrowIfNull(_constraint);
+        ArgumentNullException.ThrowIfNull(_constraint);
 
         return _constraint.IsSatisfiedBy(value);
     }
