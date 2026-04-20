@@ -26,7 +26,7 @@ internal abstract class ConstraintBase : IConstraint
     /// <inheritdoc />
     public abstract void SetDescription(StringBuilder builder);
 
-    /// <inhertdoc />
+    /// <inheritdoc cref="object.Equals(object?)" />
     [Obsolete("This is base `object` method that should not be called.", true)]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [DebuggerHidden]
