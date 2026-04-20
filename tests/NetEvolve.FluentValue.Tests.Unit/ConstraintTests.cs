@@ -69,8 +69,18 @@ public class ConstraintTests
             () => (true, Value.Contains("Hello"), "Hello World!"),
             () => (false, Value.Contains('Z', Ordinal), "Hello World!"),
             () => (true, Value.Contains('W'), "Hello World!"),
-            () => (false, Value.Contains(2), new Dictionary<string, object> { { "Hello", "World!" } }),
-            () => (true, Value.Contains("Hello"), new Dictionary<string, object> { { "Hello", "World!" } }),
+            () =>
+                (
+                    false,
+                    Value.Contains(2),
+                    new Dictionary<string, object>(StringComparer.Ordinal) { { "Hello", "World!" } }
+                ),
+            () =>
+                (
+                    true,
+                    Value.Contains("Hello"),
+                    new Dictionary<string, object>(StringComparer.Ordinal) { { "Hello", "World!" } }
+                ),
             () => (false, Value.Contains(2), new List<string> { "Hello", "World!" }),
             () => (true, Value.Contains("World!"), new List<string> { "Hello", "World!" }),
             () => (false, Value.Contains(2), Enumerable.Range(10, 10)),
