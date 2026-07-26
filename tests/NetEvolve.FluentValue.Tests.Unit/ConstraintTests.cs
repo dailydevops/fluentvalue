@@ -10,24 +10,21 @@ public class ConstraintTests
 {
     [Test]
     [MethodDataSource(nameof(ChainedInvalidOperationsData))]
-    public void Value_ChainedInvalidOperations_ShouldThrowInvalidOperationException(Func<IConstraint> funcConstraint) =>
-        _ = Assert.Throws<InvalidOperationException>(() =>
-        {
-            var _ = funcConstraint.Invoke();
-        });
+    public void Value_ChainedInvalidOperations_ShouldThrowInvalidOperationException(Action constraintAction) =>
+        _ = Assert.Throws<InvalidOperationException>(constraintAction);
 
-    public static IEnumerable<Func<Func<IConstraint>>> ChainedInvalidOperationsData() =>
+    public static IEnumerable<Func<Action>> ChainedInvalidOperationsData() =>
         [
-            () => () => Value.Not.Not,
-            () => () => Value.Null.And.And,
-            () => () => Value.Null.And.Or,
-            () => () => Value.Null.And.Xor,
-            () => () => Value.Null.Or.And,
-            () => () => Value.Null.Or.Or,
-            () => () => Value.Null.Or.Xor,
-            () => () => Value.Null.Xor.And,
-            () => () => Value.Null.Xor.Or,
-            () => () => Value.Null.Xor.Xor,
+            () => () => _ = Value.Not.Not,
+            () => () => _ = Value.Null.And.And,
+            () => () => _ = Value.Null.And.Or,
+            () => () => _ = Value.Null.And.Xor,
+            () => () => _ = Value.Null.Or.And,
+            () => () => _ = Value.Null.Or.Or,
+            () => () => _ = Value.Null.Or.Xor,
+            () => () => _ = Value.Null.Xor.And,
+            () => () => _ = Value.Null.Xor.Or,
+            () => () => _ = Value.Null.Xor.Xor,
         ];
 
     [Test]
