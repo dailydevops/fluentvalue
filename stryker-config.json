@@ -1,0 +1,31 @@
+{
+  "stryker-config": {
+    "solution": "FluentValue.slnx",
+    "mutation-level": "Advanced",
+    "reporters": [
+      "html",
+      "json",
+      "dashboard",
+      "progress"
+    ],
+    "project-info": {
+      "name": "github.com/dailydevops/fluentvalue"
+    },
+    "thresholds": {
+      "high": 80,
+      "low": 60,
+      "break": 0
+    },
+    "test-projects": [
+      "tests/NetEvolve.FluentValue.Tests.Unit/NetEvolve.FluentValue.Tests.Unit.csproj"
+    ],
+    "coverage-analysis": "perTest",
+    "mutate": [
+      "**/*.cs",
+      "!**/*.Designer.cs",
+      "!**/*.g.cs",
+      "!**/*.g.i.cs"
+    ],
+    "test-runner": "mtp"
+  }
+}
