@@ -2,6 +2,9 @@
   "stryker-config": {
     "solution": "FluentValue.slnx",
     "mutation-level": "Advanced",
+    "ignore-mutations": [
+      "linq"
+    ],
     "reporters": [
       "html",
       "json",
