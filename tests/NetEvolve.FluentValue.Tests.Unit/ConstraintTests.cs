@@ -41,7 +41,7 @@ public class ConstraintTests
             () => () => _ = Value.Null.And.SetConstraint(null!),
             () => () => _ = Value.Null.Or.SetConstraint(null!),
             () => () => _ = Value.Null.Xor.SetConstraint(null!),
-            () => () => _ = ((IOperator)Value.Not).SetConstraint(null!),
+            () => () => _ = Value.Not.SetConstraint(null!),
             () => () => _ = new AndOperator(null!),
             () => () => _ = new OrOperator(null!),
             () => () => _ = new XorOperator(null!),
