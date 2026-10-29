@@ -14,12 +14,7 @@ internal sealed class ParenthesisConstraint : ConstraintBase
         _constraint = (ConstraintBase)constraint;
     }
 
-    public override bool IsSatisfiedBy(object? value)
-    {
-        ArgumentNullException.ThrowIfNull(_constraint);
-
-        return _constraint.IsSatisfiedBy(value);
-    }
+    public override bool IsSatisfiedBy(object? value) => _constraint.IsSatisfiedBy(value);
 
     public override void SetDescription(StringBuilder builder)
     {
