@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NetEvolve.FluentValue;
+using NetEvolve.FluentValue.Operators;
 using static System.StringComparison;
 
 public class ConstraintTests
@@ -25,6 +26,25 @@ public class ConstraintTests
             () => () => _ = Value.Null.Xor.And,
             () => () => _ = Value.Null.Xor.Or,
             () => () => _ = Value.Null.Xor.Xor,
+        ];
+
+    [Test]
+    [MethodDataSource(nameof(NullArgumentData))]
+    public void Value_NullArgument_ShouldThrowArgumentNullException(Action constraintAction) =>
+        _ = Assert.Throws<ArgumentNullException>(constraintAction);
+
+    public static IEnumerable<Func<Action>> NullArgumentData() =>
+        [
+            () => () => _ = Value.Parenthesis(null!),
+            () => () => _ = Value.Null.And.Parenthesis(null!),
+            () => () => _ = Value.Not.Parenthesis(null!),
+            () => () => _ = Value.Null.And.SetConstraint(null!),
+            () => () => _ = Value.Null.Or.SetConstraint(null!),
+            () => () => _ = Value.Null.Xor.SetConstraint(null!),
+            () => () => _ = ((IOperator)Value.Not).SetConstraint(null!),
+            () => () => _ = new AndOperator(null!),
+            () => () => _ = new OrOperator(null!),
+            () => () => _ = new XorOperator(null!),
         ];
 
     [Test]
@@ -259,9 +279,12 @@ public class ConstraintTests
             // .And Operators
             () =>
                 ("\"{Value} contains `Hello` and contains `World!`.\"", Value.Contains("Hello").And.Contains("World!")),
+            () => ("\"{Value} is <null>.\"", Value.Null.And),
             // .Or Operators
+            () => ("\"{Value} is <null>.\"", Value.Null.Or),
             () => ("\"{Value} is <null> or is <empty>.\"", Value.Null.Or.Empty),
             // .Xor Operators
+            () => ("\"{Value} is <null>.\"", Value.Null.Xor),
             () => ("\"{Value} is <null> xor is <empty>.\"", Value.Null.Xor.Empty),
             // .Not.Null
             () => ("\"{Value} not is <null>.\"", Value.Not.Null),
