@@ -7,7 +7,7 @@ public class TypeExtensionsTests
 {
     [Test]
     [MethodDataSource(nameof(GetDefaultData))]
-    public async Task IsNullableType_ShouldReturnTrue_WhenTypeIsNullable(object? expected, Type type)
+    public async Task GetDefault_ShouldReturnExpected(object? expected, Type type)
     {
         // Arrange & Act
         var result = TypeExtensions.GetDefault(type);
